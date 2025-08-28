@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Huduma Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #0bab64, #3bb78f);
+      padding: 40px 15px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h4 {
+      text-align: center;
+      color: white;
+      margin-bottom: 25px;
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    .message {
+      margin-bottom: 20px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      text-align: center;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .message.error {
+      background: #ffe5e0;
+      color: #d6452f;
+    }
+
+    .message.success {
+      background: #fff9e0;
+      color: #e0a800;
+    }
+
+    .table-container {
+      width: 100%;
+      max-width: 900px;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead {
+      background: #0bab64;
+      color: white;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    tbody tr:hover {
+      background: rgba(11,175,175,0.1);
+      transition: 0.3s;
+    }
+
+    a.pay-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      background: #0bab64;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 13px;
+      transition: 0.3s;
+    }
+
+    a.pay-btn:hover {
+      background: #099659;
+    }
+
+    /* Responsive Table */
+    @media (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      thead {
+        display: none;
+      }
+      tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+      }
+      td {
+        text-align: right;
+        padding-left: 50%;
+        position: relative;
+      }
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        font-weight: bold;
+        text-align: left;
+        color: #0bab64;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h4>Huduma Dashboard</h4>
+
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.tags == 'error' %}
+        <div class="message error">{{ message }}</div>
+      {% else %}
+        <div class="message success">{{ message }}</div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Mac Address</th>
+          <th>Date</th>
+          <th>Status for Approval</th>
+          <th>Status for Payment</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for b in b %}
+        <tr>
+          <td data-label="Name">{{ b.name }}</td>
+          <td data-label="Price">{{ b.price }}</td>
+          <td data-label="Mac Address">{{ b.mac_address }}</td>
+          <td data-label="Date">{{ b.date }}</td>
+          <td data-label="Approval">{{ b.status }}</td>
+          <td data-label="Payment">{{ b.approve }}</td>
+          <td data-label="Action"><a href="{% url 'pay' %}" class="pay-btn">Pay</a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>

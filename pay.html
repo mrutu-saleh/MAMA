@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <style>
+        body{
+            background-color: rgb(11, 175, 175);
+            padding: 60px;
+            font-family: Arial, sans-serif;
+        }
+        form{
+            justify-self: center;
+            background-color: white;
+            width: 30%;
+            box-sizing: border-box;
+            border-radius: 15px;
+            box-shadow: 0px 10px 40px rgba(0,0,0,0.3);
+            padding: 25px;
+            transition: 0.3s ease;
+        }
+        form:hover {
+            transform: scale(1.02);
+        }
+        h4{
+            color: green;
+            text-align: center;
+            background-color: rgb(234, 235, 225);
+            padding: 12px;
+            font-size: 22px;
+            font-weight: 600;
+            border-radius: 8px;
+        }
+        label{
+            position: relative;
+            left: 15px;
+            font-weight: lighter;
+            color: rgb(12, 158, 163);
+            font-style: normal;
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, input{
+            position: relative;
+            border: 1px solid green;
+            left: 15px;
+            width: 90%;
+            font-weight: lighter;
+            box-sizing: border-box;
+            font-style: oblique;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            transition: 0.3s;
+        }
+        select:focus, input:focus{
+            outline: none;
+            border-color: rgb(41, 132, 212);
+            box-shadow: 0px 0px 8px rgba(41, 132, 212,0.6);
+        }
+        button{
+            width: 100%;
+            background: linear-gradient(135deg, #4CAF50, #2196F3);
+            border: none;
+            padding: 12px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover{
+            background: linear-gradient(135deg, #2196F3, #4CAF50);
+            transform: translateY(-2px);
+            box-shadow: 0px 6px 15px rgba(0,0,0,0.2);
+        }
+        @media(max-width:840px){
+            form{
+                width: 100%;
+                background-color:white;
+                min-height: 30vh;
+            }
+            input, select{
+                width: 80%;
+                background-color:white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        <h4>Make Payment</h4>
+        {% csrf_token %}
+        <label>Payment Provider</label>
+        <select name="pay" required>
+            <option value="">-- Select Provider --</option>
+            <option value="tigo">Tigo</option>
+            <option value="vodacom">Vodacom</option>
+            <option value="halotel">Halotel</option>
+            <option value="airtel">Airtel</option>
+        </select>
+        
+        <label>Phone Number</label>
+        <input type="tel" name="number" placeholder="Enter Phone Number" required>
+        
+        <label>Amount</label>
+        <input type="number" name="amount" placeholder="Enter Amount" required>
+        
+        <button type="submit">Pay Now</button>
+    </form>
+</body>
+</html>

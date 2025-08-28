@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Application Form</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0bab64, #3bb78f);
+      padding: 20px;
+    }
+
+    .container {
+      background: #fff;
+      width: 100%;
+      max-width: 420px;
+      padding: 30px 25px;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    h4 {
+      text-align: center;
+      color: #0bab64;
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .message {
+      margin-bottom: 15px;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      text-align: center;
+      font-style: italic;
+    }
+
+    .message.error {
+      background: #ffe5e0;
+      color: #d6452f;
+    }
+
+    .message.success {
+      background: #fff9e0;
+      color: #e0a800;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    input {
+      padding: 12px 15px;
+      border: 1px solid #0bab64;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input:focus {
+      border-color: #3bb78f;
+      box-shadow: 0 0 8px rgba(59,183,143,0.3);
+    }
+
+    button {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #0bab64;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #099659;
+    }
+
+    p.powered {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 13px;
+      font-style: italic;
+      color: #555;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+      h4 {
+        font-size: 20px;
+      }
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'error' %}
+          <div class="message error">{{ message }}</div>
+        {% else %}
+          <div class="message success">{{ message }}</div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    <h4>Application Form</h4>
+
+    <form action="" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="text" name="name" placeholder="Enter Name" required>
+      <input type="number" name="price" placeholder="Enter Price" required>
+      <input type="text" name="mac_address" placeholder="Enter Mac Address" required>
+      <input type="date" name="date" required>
+      <button type="submit">Save</button>
+    </form>
+
+    <p class="powered">Powered by WinsNet Technologies</p>
+  </div>
+
+</body>
+</html>

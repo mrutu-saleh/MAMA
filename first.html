@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WinsNet</title>
+    <style>
+        body {
+            padding: 70px;
+            background-color: rgb(11, 175, 175);
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin: auto;
+            background-color: white;
+            width: 40%;
+            padding: 20px;
+            box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        button {
+            width: 90%;
+            border: none;
+            background-color: rgb(64, 212, 19);
+            color: black;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 8px;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background-color: green;
+            color: white;
+        }
+
+        input {
+            margin-top: 10px;
+            border: 1px solid rgb(40, 204, 8);
+            font-style: italic;
+            font-size: 14px;
+            width: 80%;
+            padding: 6px;
+            border-radius: 5px;
+        }
+
+        .msg {
+            font-weight: bold;
+            font-style: oblique;
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+
+        .msg.error {
+            color: rgb(223, 67, 5);
+            background-color: #ffe6e6;
+            border: 1px solid #ff9999;
+        }
+
+        .msg.success {
+            color: green;
+            background-color: #e6ffe6;
+            border: 1px solid #99ff99;
+        }
+
+        a {
+            display: block;
+            font-weight: bold;
+            font-style: oblique;
+            color: rgb(4, 189, 4);
+            text-decoration: none;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid rgb(23, 183, 204);
+            border-radius: 8px;
+            transition: 0.3s ease;
+        }
+
+        a:hover {
+            background-color: rgb(23, 183, 204);
+            color: white;
+        }
+
+        h4 {
+            text-align: center;
+            font-style: oblique;
+            font-weight: lighter;
+            color: white;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        @media(max-width:840px) {
+            .container {
+                width: 100%;
+                min-height: 30vh;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+  {% if messages %}
+    {% for message in messages %}
+      {% if message.tags == 'error' %}
+        <div class="msg error">{{ message }}</div>
+      {% else %}
+        <div class="msg success">{{ message }}</div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  <h4>Welcome to WinsNet Technologies</h4>
+
+  <div class="container">
+      <a href="{% url 'dashboard' %}">Do you have an account? Register here</a>
+      <a href="{% url 'login_view' %}">Proceed to your account (Login here)</a>
+  </div>
+</body>
+</html>
